@@ -18,7 +18,9 @@ class API_Request:  # API 요청, 값 저장.
         "Population": "SP.POP.TOTL",
         "Unemployment": "SL.UEM.TOTL.ZS",
         "Life-Expectancy": "SP.DYN.LE00.IN",
-
+        "Expenditure-Education": "SE.XPD.TOTL.GD.ZS",
+        "Access-electricity": "EG.ELC.ACCS.ZS",
+        "Access-water": "SH.H2O.SMDW.ZS"
     }
     def request_api(self, country="Bhutan", indicator="GDP"):  # API 기본 요청
         url = f"https://api.worldbank.org/v2/country/{self.country_code[country]}/indicator/{self.indicator_code[indicator]}?format={self.dataFormat}"
