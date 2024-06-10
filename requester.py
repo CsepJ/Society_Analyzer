@@ -1,4 +1,3 @@
-from bs4 import BeautifulSoup
 import requests
 import os
 import json
@@ -6,21 +5,21 @@ class API_Request:  # API 요청, 값 저장.
     folderName = "data"  # API 파일 폴더 이름
     dataFormat = "json"  # API 자료 형식 (XML/JSON)
     country_code = {
-        "Bhutan": "BT",
-        "Costa_Rica": "CR",
         "Korea": "KR",
         "United_States": "US"
     }
     indicator_code = {  # 지표 코드 (언더바 X - 파일 이름)
         "GDP": "NY.GDP.MKTP.CD",
         "Personal_GDP": "NY.GDP.PCAP.CD",
-        "GDP-Growth": "NY.GDP.MKTP.KD.ZG",
         "Population": "SP.POP.TOTL",
         "Unemployment": "SL.UEM.TOTL.ZS",
-        "Life-Expectancy": "SP.DYN.LE00.IN",
-        "Expenditure-Education": "SE.XPD.TOTL.GD.ZS",
-        "Access-electricity": "EG.ELC.ACCS.ZS",
-        "Access-water": "SH.H2O.SMDW.ZS"
+        "Labor_Participation": "SL.TLF.CACT.ZS",
+        "Gini": "SI.POV.GINI",
+        "Airplane_Infra": "IS.AIR.PSGR",
+        "Train_Infra": "IS.RRS.TOTL.KM",
+        "Electricity_Infra": "EG.ELC.ACCS.ZS",
+        "Internet_Infra": "IT.NET.USER.ZS",
+        "Health_Infra": "SH.XPD.CHEX.GD.ZS"
     }
     def request_api(self, country="Bhutan", indicator="GDP"):  # API 기본 요청
         url = f"https://api.worldbank.org/v2/country/{self.country_code[country]}/indicator/{self.indicator_code[indicator]}?format={self.dataFormat}"
