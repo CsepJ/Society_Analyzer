@@ -1,54 +1,54 @@
-from matplotlib import pyplot as plt
-from requester import API_Request
-import pandas as pd
+from matplotlib import pyplot as plt # 그래프 패키지
+from requester import API_Request # API 요청 클래스
+import pandas as pd # 데이터 관리 패키지
 
-def getDataToDate(data, date):
+def getDataToDate(data, date): # 날짜로 데이터를 얻어내는 함수
     for k in data:
         if k["date"] == date:
             return k
         
-plt.figure(figsize=(15,12))
-country = "Korea"
-api_gini = pd.read_csv("./data/Korea_Income.csv")
-plt.subplot(3, 3, 1)
+plt.figure(figsize=(15,12)) # 그래프 사이즈 설정
+country = "Korea" # 국가 변수 설정
+api_gini = pd.read_csv("./data/Korea_Income.csv") # csv 파일로 된 한국 지니 계수 데이터 불러오기
+plt.subplot(3, 3, 1) # 1번째 그래프(지니 계수)
 plt.plot(list(api_gini["시점"]), list(api_gini["지니계수"]))
 plt.title(f"{country} - Gini")
 api_airplane = API_Request().getData(country, "Airplane_Infra")
-plt.subplot(3, 3, 2)
+plt.subplot(3, 3, 2) # 2번째 그래프(항공 수치)
 plt.plot(list(map(lambda x: x["date"], api_airplane)), list(map(lambda x: x["value"] if x else -1, api_airplane)))
 plt.title(f"{country} - The Number of Aircraft passengers (10⁷)")
 api_train = API_Request().getData(country, "Train_Infra")
-plt.subplot(3, 3, 3)
+plt.subplot(3, 3, 3) # 3번째 그래프(철도 수치)
 plt.plot(list(map(lambda x: x["date"], api_train)), list(map(lambda x: (x["value"]) if x else -1, api_train)))
 plt.title(f"{country} - Rail lines")
 api_electricity = API_Request().getData(country, "Electricity_Infra")
-plt.subplot(3, 3, 4)
+plt.subplot(3, 3, 4) # 4번째 그래프(전력 수치)
 plt.plot(list(map(lambda x: x["date"], api_electricity)), list(map(lambda x: (x["value"]) if x else -1, api_electricity)))
 plt.title(f"{country} - Access to electricity (%)")
 api_personalgdp = API_Request().getData(country, "Personal_GDP")
-plt.subplot(3, 3, 5)
+plt.subplot(3, 3, 5) # 5번째 그래프(1인 GDP 수치)
 plt.plot(list(map(lambda x: x["date"], api_personalgdp)), list(map(lambda x: (x["value"]) if x else -1, api_personalgdp)))
 plt.title(f"{country} - Personal GDP")
 api_labor = API_Request().getData(country, "Labor_Participation")
-plt.subplot(3, 3, 6)
+plt.subplot(3, 3, 6) # 6번째 그래프(노동 참여율 수치)
 plt.plot(list(map(lambda x: x["date"], api_labor)), list(map(lambda x: (x["value"]) if x else -1, api_labor)))
 plt.title(f"{country} - Labor Participation (%)")
 api_internet = API_Request().getData(country, "Internet_Infra")
-plt.subplot(3, 3, 7)
+plt.subplot(3, 3, 7) # 7번째 그래프(통신(인터넷) 수치)
 plt.plot(list(map(lambda x: x["date"], api_internet)), list(map(lambda x: (x["value"]) if x else -1, api_internet)))
 plt.title(f"{country} - Using Internet (%)")
 api_unemployment = API_Request().getData(country, "Unemployment")
-plt.subplot(3, 3, 8)
+plt.subplot(3, 3, 8) # 8번째 그래프(실업률 수치)
 plt.plot(list(map(lambda x: x["date"], api_unemployment)), list(map(lambda x: (x["value"]) if x else -1, api_unemployment)))
 plt.title(f"{country} - Unemployment (%)")
 api_population = API_Request().getData(country, "Population")
-plt.subplot(3, 3, 9)
+plt.subplot(3, 3, 9) # 9번째 그래프(인구 수치)
 plt.plot(list(map(lambda x: x["date"], api_population)), list(map(lambda x: (x["value"]) if x else -1, api_population)))
 plt.title(f"{country} - Population (10⁷)")
 plt.tight_layout()
-plt.savefig("./image/Korea_Data.png", dpi=300)
+plt.savefig("./image/Korea_Data.png", dpi=300) # 이미지로 저장
 
-plt.figure(figsize=(15,12))
+plt.figure(figsize=(15,12)) # 그래프 사이즈 설정
 country = "United_States"
 api_gini = API_Request().getData(country, "Gini")
 plt.subplot(3, 3, 1)
